@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,17 +11,21 @@
 <div class="container">
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <a href="/" class="d-flex align-items-center col-md-3 mb-2 text-dark mb-md-0 text-decoration-none">
-            <img class="bi me-2" width="50" height="50" role="img" th:src="@{/images/shortli.svg}" alt="Shortli" />
+            <img class="bi me-2" width="70" height="50" role="img" th:src="@{/images/shortli.svg}" alt="Shortli" />
         </a>
         <div class="col-md-3 text-end">
-            <a th:href="@{/login}"><button type="button" class="btn btn-outline-primary me-2">Вход</button></a>
-            <a th:href="@{/signup}"><button type="button" class="btn btn-primary">Регистрация</button></a>
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}"><button type="button" class="btn btn-danger me-2">Админка</button></a>
+            <a sec:authorize="!isAuthenticated()" th:href="@{/login}"><button type="button" class="btn btn-outline-primary me-2">Вход</button></a>
+            <a sec:authorize="!isAuthenticated()" th:href="@{/signup}"><button type="button" class="btn btn-primary">Регистрация</button></a>
+
+            <a sec:authorize="isAuthenticated()" th:href="@{/dashboard}"><button type="button" class="btn btn-primary">Мои ссылки</button></a>
+            <a sec:authorize="isAuthenticated()" th:href="@{/logout}"><button type="button" class="btn btn-outline-primary">Выйти</button></a>
         </div>
     </header>
 </div>
 <div class="container py-5">
     <h2 class="text-center mb-3">Shortli - сократи ссылку!</h2>
-    <form class="row justify-content-center">
+    <form th:action="@{/shorten}" method="post" class="row justify-content-center">
         <div class="row col-sm-5 mb-3 text-center">
             <label for="linkInput" class="form-label"></label>
             <input type="email" class="py-3 form-control text-center mb-3" id="linkInput">

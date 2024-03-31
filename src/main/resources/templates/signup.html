@@ -16,24 +16,29 @@
             </svg>
         </a>
         <div class="col-md-3 text-end">
-            <a th:href="@{/}"><button type="button" class="btn btn-outline-primary me-2">Назад</button></a>
+            <a th:href="@{/}">
+                <button type="button" class="btn btn-outline-primary me-2">Назад</button>
+            </a>
         </div>
     </header>
 </div>
 <h1 class="text-center">Регистрация</h1>
 <div class="d-flex align-self-center justify-content-center py-5">
-    <form class="col-sm-3">
+    <form th:action="@{/signup}" th:object="${user}" method="post" class="col-sm-3">
+        <div th:if="${existedUser == true}" class="alert alert-danger notification" role="alert">
+            <p>Пользователь с такой почтой или именем уже существует.</p>
+        </div>
         <div class="mb-4">
             <label for="inputEmail" class="form-label">Адрес электронной почты</label>
-            <input type="email" class="form-control" id="inputEmail">
+            <input type="email" class="form-control" id="inputEmail" th:field="*{email}" th:required="required">
+        </div>
+        <div class="mb-4">
+            <label for="inputUsername" class="form-label">Имя пользователя</label>
+            <input type="text" class="form-control" id="inputUsername" th:field="*{username}" th:required="required">
         </div>
         <div class="mb-4">
             <label for="inputPassword" class="form-label">Пароль</label>
-            <input type="password" class="form-control" id="inputPassword">
-        </div>
-        <div class="mb-4 form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Проверить меня</label>
+            <input type="password" class="form-control" id="inputPassword" th:field="*{password}" th:required="required">
         </div>
         <button type="submit" class="btn btn-primary">Отправить</button>
     </form>
