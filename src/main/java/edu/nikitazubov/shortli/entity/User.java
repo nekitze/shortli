@@ -3,15 +3,14 @@ package edu.nikitazubov.shortli.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users")
 @Getter
 @Setter
-@ToString
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,11 +22,18 @@ public class User {
     @Column(unique = true)
     private String email;
 
-    private String role;
-
     private String password;
+
+    private String role;
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "owner_id")
     private List<Url> ownedUrls;
+
+    public void addUrlToUser(Url url) {
+        if (ownedUrls == null) {
+            ownedUrls = new ArrayList<>();
+        }
+        ownedUrls.add(url);
+    }
 }

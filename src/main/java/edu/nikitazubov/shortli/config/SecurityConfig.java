@@ -24,7 +24,8 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/images/**", "/login/**", "/signup/**", "/shorten/**", "/error/**").permitAll()
+                        .requestMatchers("/", "/images/**", "/login/**", "/signup/**", "/shorten/**", "/error/**"
+                        ,"/js/**").permitAll()
                         .requestMatchers("/links/**, /logout/**").authenticated()
                         .requestMatchers("/admin/**", "/swagger-ui/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
@@ -60,5 +61,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

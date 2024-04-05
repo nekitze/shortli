@@ -7,11 +7,6 @@ public class UrlShortenerImpl implements UrlShortener {
 
     @Override
     public String shorten(String longUrl) {
-        return null;
-    }
-
-    @Override
-    public String longUrlOf(String shortUrl) {
-        return null;
+        return "shorturl.domain/ABCDEF123";
     }
 }

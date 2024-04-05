@@ -11,7 +11,7 @@ public interface UrlService {
 
     Url getUrlByShortUrl(String shortUrl);
 
-    Url addNewUrl(Url url);
+    Url addNewUrl(String fullUrl);
 
     Url updateUrl(Url url);
 

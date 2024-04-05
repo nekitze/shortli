@@ -15,17 +15,12 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     @Override
     public List<User> getAllUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
     public User getUserById(Long id) {
-        return null;
-    }
-
-    @Override
-    public User getUserByEmail(String email) {
-        return null;
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
