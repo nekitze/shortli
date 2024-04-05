@@ -9,7 +9,29 @@
 </head>
 <body>
 
-<h1>Тут будут ссылки пользователя:</h1>
+<h1>Cсылки пользователя:</h1>
+
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col"> Full Url </th>
+        <th scope="col"> Short Url </th>
+        <th scope="col"> Visits </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${urlList.isEmpty()}">
+        <td colspan="3"> No Urls Available </td>
+    </tr>
+    <tr th:each="url : ${urlList}">
+        <td><span th:text="${url.getFullUrl()}"> Full Url </span></td>
+        <td><span th:text="${url.getShortUrl()}"> Short Url </span></td>
+        <td><span th:text="${url.getVisitsCount()}"> Visits </span></td>
+    </tr>
+    </tbody>
+</table>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"

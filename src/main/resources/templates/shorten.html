@@ -24,19 +24,18 @@
     </header>
 </div>
 <div class="container py-5">
-    <h2 class="text-center mb-3">Shortli - сократи ссылку!</h2>
-    <form th:action="@{/shorten}" method="post">
+    <h2 class="text-center mb-3">Твоя короткая ссылка:</h2>
         <div class="row col-sm-5 mb-3 mx-auto">
-            <label for="linkInput" class="form-label"></label>
-            <input type="text" class="py-3 form-control text-center mb-3" id="linkInput" th:name="fullUrl">
-            <button type="submit" class="btn btn-primary btn-lg">Сократить!</button>
+            <label for="shortLink" class="row form-label"></label>
+            <input type="text" class="py-3 form-control text-center mb-2" id="shortLink" th:value="${createdUrl}" readonly="readonly">
+            <a type="button" class="btn btn-primary btn-lg mb-4" onclick="copyToClipboard('shortLink')">Скопировать</a>
+            <a type="button" class="btn btn-secondary btn-lg" th:href="@{/}">Создать еще ссылку</a>
         </div>
-
-    </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>
