@@ -70,6 +70,7 @@
     </dependencies>
 
     <build>
+        <finalName>Shortli</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
