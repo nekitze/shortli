@@ -112,7 +112,7 @@ public class UrlServiceImplTest {
     @Test
     void addNewUrl_NoAuth() {
         when(urlShortener.shorten(any())).thenReturn(SHORT_KEY);
-        Url url = urlService.addNewUrl(LONG_URL);
+        urlService.addNewUrl(LONG_URL);
 
         verify(urlRepository).save(argThat(u ->
                 u.getFullUrl().equals(EXAMPLE_ANONYMOUS_URL.getFullUrl()) &&
