@@ -19,16 +19,26 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
+
+    private static final String[] WHITE_LIST_URLS = {
+            "/",
+            "/images/**",
+            "/login/**",
+            "/signup/**",
+            "/shorten/**",
+            "/error/**",
+            "/js/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/", "/images/**", "/login/**", "/signup/**", "/shorten/**", "/error/**"
-                        ,"/js/**").permitAll()
+                        .requestMatchers(WHITE_LIST_URLS).permitAll()
                         .requestMatchers("/links/**, /logout/**").authenticated()
                         .requestMatchers("/admin/**", "/swagger-ui/**").hasRole("ADMIN")
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 )
                 .formLogin(Customizer.withDefaults());
         return http.build();
