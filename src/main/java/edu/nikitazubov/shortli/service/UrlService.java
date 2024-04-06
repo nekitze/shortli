@@ -9,11 +9,11 @@ public interface UrlService {
 
     Url getUrlById(Long id);
 
-    Url getUrlByShortUrl(String shortUrl);
+    Url getUrlByKey(String shortKey);
 
     Url addNewUrl(String fullUrl);
 
     Url updateUrl(Url url);
 
-    String deleteUrl(Long id);
+    void deleteUrl(Long id);
 }

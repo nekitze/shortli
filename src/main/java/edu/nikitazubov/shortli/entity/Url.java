@@ -13,8 +13,8 @@ public class Url {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @Column(unique = true)
-    private String shortUrl;
+    @Column(unique = true)
+    private String key;
 
     private String fullUrl;
 
