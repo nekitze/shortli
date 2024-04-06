@@ -17,9 +17,6 @@ public class User {
     private Long id;
 
     @Column(unique = true)
-    private String username;
-
-    @Column(unique = true)
     private String email;
 
     private String password;
@@ -35,5 +32,9 @@ public class User {
             ownedUrls = new ArrayList<>();
         }
         ownedUrls.add(url);
+    }
+
+    public String getUsername() {
+        return email;
     }
 }
