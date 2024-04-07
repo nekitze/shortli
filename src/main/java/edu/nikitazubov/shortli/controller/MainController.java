@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -29,5 +31,15 @@ public class MainController {
     @GetMapping("/admin")
     public String admin() {
         return "admin";
+    }
+
+    @RequestMapping(value = {"/robots.txt", "/robot.txt"})
+    @ResponseBody
+    public String getRobotsTxt() {
+        return """
+                User-agent: *
+                Disallow: /
+                Allow: /main
+                """;
     }
 }
