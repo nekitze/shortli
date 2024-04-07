@@ -7,21 +7,11 @@
         </a>
         <div>
             <div class="d-none d-md-block">
-                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">
-                    <button type="button" class="btn btn-danger me-2">Админка</button>
-                </a>
-                <a sec:authorize="!isAuthenticated()" th:href="@{/login}">
-                    <button type="button" class="btn btn-outline-primary me-2">Вход</button>
-                </a>
-                <a sec:authorize="!isAuthenticated()" th:href="@{/signup}">
-                    <button type="button" class="btn btn-primary">Регистрация</button>
-                </a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/dashboard}">
-                    <button type="button" class="btn btn-primary me-2">Мои ссылки</button>
-                </a>
-                <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
-                    <button type="button" class="btn btn-outline-primary">Выйти</button>
-                </a>
+                <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" class="btn btn-danger me-2">Админка</a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn btn-outline-primary me-2">Вход</a>
+                <a sec:authorize="!isAuthenticated()" th:href="@{/signup}" class="btn btn-primary">Регистрация</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/dashboard}" class="btn btn-primary me-2">Мои ссылки</a>
+                <a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="btn btn-outline-primary">Выйти</a>
             </div>
 
             <div class="d-md-none">
