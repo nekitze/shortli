@@ -22,4 +22,11 @@ public class Url {
 
     @Column(name = "owner_id")
     private Long ownerId;
+
+    public void setFullUrl(String fullUrl) {
+        if (!fullUrl.startsWith("http://") && !fullUrl.startsWith("https://")) {
+            fullUrl = "http://" + fullUrl;
+        }
+        this.fullUrl = fullUrl;
+    }
 }
