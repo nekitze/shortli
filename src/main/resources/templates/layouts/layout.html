@@ -24,6 +24,19 @@
 
 <div layout:fragment="content">CONTENT</div>
 
+<div layout:fragment="banner">
+    <!-- Yandex.RTB R-A-7285205-1 -->
+    <div id="yandex_rtb_R-A-7285205-1"></div>
+    <script>
+        window.yaContextCb.push(()=>{
+            Ya.Context.AdvManager.render({
+                "blockId": "R-A-7285205-1",
+                "renderTo": "yandex_rtb_R-A-7285205-1"
+            })
+        })
+    </script>
+</div>
+
 <div layout:fragmet="footer">
     <div th:replace="~{fragments/footers :: footer}"></div>
 </div>
