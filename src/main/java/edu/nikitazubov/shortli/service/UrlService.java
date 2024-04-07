@@ -15,5 +15,7 @@ public interface UrlService {
 
     Url updateUrl(Url url);
 
+    Url visitUrl(String shortKey);
+
     void deleteUrl(Long id);
 }

@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+
 import java.util.Optional;
 
 import java.util.List;
@@ -24,7 +25,7 @@ public class UrlServiceImpl implements UrlService {
     @Override
     public List<Url> getAllUrls() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication != null) {
+        if (authentication != null) {
             User currentUser = userRepository.findUserByEmail(authentication.getName()).get();
             return urlRepository.findUrlsByOwnerId(currentUser.getId());
         } else {
@@ -43,17 +44,25 @@ public class UrlServiceImpl implements UrlService {
     }
 
     @Override
+    public Url visitUrl(String shortKey) {
+        Url url = urlRepository.findUrlByKey(shortKey).orElse(null);
+        if(url != null) {
+            urlRepository.incrementVisitsCountByKey(shortKey);
+        }
+        return url;
+    }
+
+    @Override
     public Url addNewUrl(String fullUrl) {
         Url url = new Url();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if(authentication != null) {
+        if (authentication != null) {
             Optional<User> currentUser = userRepository.findUserByEmail(authentication.getName());
-	    if(currentUser.isPresent()) {
-		url.setOwnerId(currentUser.get().getId());
-	    }
+            currentUser.ifPresent(user -> url.setOwnerId(user.getId()));
         }
         url.setFullUrl(fullUrl);
         url.setKey(urlShortener.shorten(fullUrl));
+        url.setVisitsCount(0L);
         return urlRepository.save(url);
     }
 

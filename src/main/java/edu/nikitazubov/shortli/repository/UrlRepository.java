@@ -1,12 +1,22 @@
 package edu.nikitazubov.shortli.repository;
 
 import edu.nikitazubov.shortli.entity.Url;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface UrlRepository extends JpaRepository<Url, Long> {
-    public Optional<Url> findUrlByKey(String key);
-    public List<Url> findUrlsByOwnerId(Long id);
+    Optional<Url> findUrlByKey(String key);
+
+    List<Url> findUrlsByOwnerId(Long id);
+
+    @Modifying
+    @Transactional
+    @Query("update Url u set u.visitsCount = u.visitsCount + 1 where u.key = :key")
+    void incrementVisitsCountByKey(@Param("key") String key);
 }

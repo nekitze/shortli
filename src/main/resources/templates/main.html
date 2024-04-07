@@ -12,7 +12,7 @@
     <div class="container">
         <h1 class="text-center">Shortli - сократи ссылку</h1>
         <form th:action="@{/shorten}" method="post" class="py-5">
-            <div class="row col-sm-5 mb-3 mx-auto">
+            <div class="row col-sm-10 col-md-8 col-lg-6 mb-3 mx-auto">
                 <label for="linkInput" class="form-label"></label>
                 <input type="url" class="py-3 form-control text-center mb-3" id="linkInput" th:name="fullUrl" placeholder="Вставьте ссылку, которую нужно сократить" required>
                 <button type="submit" class="btn btn-primary btn-lg">Сократить!</button>
@@ -20,7 +20,7 @@
         </form>
     </div>
 
-    <div class="col-md-5 container py-5">
+    <div class="col-md-10 col-lg-6 container py-3">
         <p class="fs-5">Знакомьтесь, Shortli - бесплатный помощник в сокращении ссылок!</p>
         <p class="fs-5">Shortli предлагает простой и удобный способ сокращения длинных и сложных URL-адресов в короткие,
             запоминающиеся и легко отслеживаемые ссылки. Это идеальный инструмент для тех, кто хочет сделать сложные
