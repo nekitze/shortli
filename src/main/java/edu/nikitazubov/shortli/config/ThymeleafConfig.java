@@ -10,10 +10,19 @@ public class ThymeleafConfig {
     @Value("${shortli.domain.name}")
     private String domainName;
 
+    @Value("${shortli.ads.enabled}")
+    private boolean adsEnabled;
+
     @Bean
     public String domainName() {
         return domainName;
     }
+
+    @Bean
+    public boolean adsEnabled() {
+        return adsEnabled;
+    }
+
     @Bean
     public LayoutDialect layoutDialect() {
         return new LayoutDialect();
