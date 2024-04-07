@@ -10,12 +10,19 @@
 <div layout:fragment="content">
     <div class="container py-5">
         <h2 class="text-center mb-3">Вот короткая ссылка:</h2>
-            <div class="row col-sm-5 mb-3 mx-auto">
-                <label for="shortLink" class="row form-label"></label>
-                <input type="text" class="py-3 form-control text-center mb-2" id="shortLink" th:value="${createdUrl}" readonly="readonly">
-                <a type="button" class="btn btn-primary btn-lg mb-4" onclick="copyToClipboard('shortLink')">Скопировать</a>
-                <a type="button" class="btn btn-secondary btn-lg" th:href="@{/}">Создать еще ссылку</a>
-            </div>
+        <div class="row col-sm-5 mb-3 mx-auto">
+            <label for="shortLink" class="row form-label"></label>
+            <input type="text" class="py-3 form-control text-center mb-2" id="shortLink" th:value="${createdUrl}"
+                   readonly="readonly">
+            <a type="button" class="btn btn-primary btn-lg mb-4" onclick="copyToClipboard('shortLink')">Скопировать</a>
+            <a type="button" class="btn btn-secondary btn-lg" th:href="@{/}">Создать еще ссылку</a>
+        </div>
+    </div>
+    <div sec:authorize="!isAuthenticated()"
+         class="alert alert-warning col-sm-10 col-md-8 col-lg-6 py-4 mx-auto text-center">
+        <h3 class="text-center mb-3">Как отслеживать свои ссылки?</h3>
+        <p class="fs-5">Для сохранения ссылок с привязкой к вашему профилю необходимо <a href="/signup">зарегистрироваться</a>
+            или <a href="/login">войти</a> в свой аккаунт.</p>
     </div>
     <script type="text/javascript" th:src="@{/js/main.js}"></script>
 </div>
