@@ -2,7 +2,6 @@ package edu.nikitazubov.shortli.controller;
 
 import edu.nikitazubov.shortli.entity.User;
 import edu.nikitazubov.shortli.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
