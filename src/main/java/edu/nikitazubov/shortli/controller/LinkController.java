@@ -19,7 +19,7 @@ public class LinkController {
     private final UrlService urlService;
 
     @PostMapping("/shorten")
-    public String shorten(@RequestParam(value = "fullUrl", required = true) String fullUrl, Model model) {
+    public String shorten(@RequestParam(value = "fullUrl") String fullUrl, Model model) {
         Url createdUrl = urlService.addNewUrl(fullUrl);
         model.addAttribute("createdUrl", DOMAIN_NAME + "/" + createdUrl.getKey());
         return "shorten";

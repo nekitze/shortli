@@ -23,9 +23,9 @@ public class SignUpController {
     }
 
     @PostMapping("/signup")
-    public String createUser(@ModelAttribute("user") User user, Model model, HttpServletRequest request) {
+    public String createUser(@ModelAttribute("user") User user, Model model) {
         try {
-            User existedUser = userService.addNewUser(user);
+            userService.addNewUser(user);
             model.addAttribute("registered", true);
             return "login";
         } catch (Exception e) {
