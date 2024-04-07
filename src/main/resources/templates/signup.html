@@ -8,20 +8,8 @@
 <body>
 
 <div layout:fragment="header">
-    <div class="container">
-        <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-            <a href="/" class="d-flex align-items-center col-md-3 mb-2 text-dark mb-md-0 text-decoration-none">
-                <img class="bi me-2" width="70" height="70" role="img" th:src="@{/images/Shortli.png}" alt="Shortli"/>
-            </a>
-            <div class="col-md-3 text-end">
-                <a th:href="@{/}">
-                    <button type="button" class="btn btn-outline-primary me-2">Назад</button>
-                </a>
-            </div>
-        </header>
-    </div>
+    <div th:replace="~{fragments/headers :: headerBack}"></div>
 </div>
-
 
 <div layout:fragment="content">
     <h1 class="text-center">Регистрация</h1>
@@ -32,11 +20,11 @@
             </div>
             <div class="mb-4">
                 <label for="inputEmail" class="form-label">Адрес электронной почты</label>
-                <input type="email" class="form-control" id="inputEmail" th:field="*{email}" th:required="required">
+                <input type="email" class="form-control" id="inputEmail" th:field="*{email}" placeholder="example@email.com" th:required="required">
             </div>
             <div class="mb-4">
                 <label for="inputPassword" class="form-label">Пароль</label>
-                <input type="password" class="form-control" id="inputPassword" th:field="*{password}" th:required="required">
+                <input type="password" class="form-control" id="inputPassword" th:field="*{password}" placeholder="Пароль" th:required="required">
             </div>
             <button type="submit" class="btn btn-primary">Отправить</button>
         </form>

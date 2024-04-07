@@ -7,7 +7,6 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -23,7 +22,6 @@ public class SecurityConfig {
     private static final String[] WHITE_LIST_URLS = {
             "/",
             "/images/**",
-            "/login/**",
             "/signup/**",
             "/shorten/**",
             "/error/**",
@@ -40,7 +38,10 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**", "/swagger-ui/**").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
-                .formLogin(Customizer.withDefaults());
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .permitAll()
+                );
         return http.build();
     }
 

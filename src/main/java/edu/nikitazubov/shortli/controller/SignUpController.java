@@ -2,6 +2,7 @@ package edu.nikitazubov.shortli.controller;
 
 import edu.nikitazubov.shortli.entity.User;
 import edu.nikitazubov.shortli.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,13 +23,14 @@ public class SignUpController {
     }
 
     @PostMapping("/signup")
-    public String createUser(@ModelAttribute("user") User user, Model model) {
+    public String createUser(@ModelAttribute("user") User user, Model model, HttpServletRequest request) {
         try {
             User existedUser = userService.addNewUser(user);
+            model.addAttribute("registered", true);
+            return "login";
         } catch (Exception e) {
             model.addAttribute("existedUser", true);
             return "signup";
         }
-        return "redirect:/login";
     }
 }

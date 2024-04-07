@@ -6,13 +6,14 @@
 </head>
 
 <body>
+
 <div layout:fragment="content">
-    <div class="container py-5">
-        <h2 class="text-center mb-3">Shortli - сократи ссылку!</h2>
-        <form th:action="@{/shorten}" method="post">
+    <div class="container">
+        <h1 class="text-center">Shortli - сократи ссылку</h1>
+        <form th:action="@{/shorten}" method="post" class="py-5">
             <div class="row col-sm-5 mb-3 mx-auto">
                 <label for="linkInput" class="form-label"></label>
-                <input type="url" class="py-3 form-control text-center mb-3" id="linkInput" th:name="fullUrl">
+                <input type="url" class="py-3 form-control text-center mb-3" id="linkInput" th:name="fullUrl" placeholder="Вставьте ссылку, которую нужно сократить" required>
                 <button type="submit" class="btn btn-primary btn-lg">Сократить!</button>
             </div>
         </form>

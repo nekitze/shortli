@@ -1,4 +1,6 @@
-<div th:fragment="header" class="container">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<div th:fragment="general_header" class="container">
     <header class="d-flex align-items-center justify-content-center justify-content-between py-3 mb-3 border-bottom">
         <a href="/" class="d-flex align-items-center col-md-3 mb-2 text-dark mb-md-0 text-decoration-none">
             <img class="bi me-2" width="70" height="70" role="img" th:src="@{/images/Shortli.png}" alt="Shortli"/>
@@ -15,7 +17,7 @@
                     <button type="button" class="btn btn-primary">Регистрация</button>
                 </a>
                 <a sec:authorize="isAuthenticated()" th:href="@{/dashboard}">
-                    <button type="button" class="btn btn-primary">Мои ссылки</button>
+                    <button type="button" class="btn btn-primary me-2">Мои ссылки</button>
                 </a>
                 <a sec:authorize="isAuthenticated()" th:href="@{/logout}">
                     <button type="button" class="btn btn-outline-primary">Выйти</button>
@@ -33,37 +35,28 @@
                         </svg>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}"
-                               class="dropdown-item">Админка</a></li>
-                        <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="dropdown-item">Вход</a>
-                        </li>
-                        <li><a sec:authorize="!isAuthenticated()" th:href="@{/signup}"
-                               class="dropdown-item">Регистрация</a></li>
-                        <li><a sec:authorize="isAuthenticated()" th:href="@{/dashboard}" class="dropdown-item">Мои
-                            ссылки</a></li>
+                        <li><a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}" class="dropdown-item">Админка</a></li>
+                        <li><a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="dropdown-item">Вход</a> </li>
+                        <li><a sec:authorize="!isAuthenticated()" th:href="@{/signup}" class="dropdown-item">Регистрация</a></li>
+                        <li><a sec:authorize="isAuthenticated()" th:href="@{/dashboard}" class="dropdown-item">Мои ссылки</a></li>
                         <li><a sec:authorize="isAuthenticated()" th:href="@{/logout}" class="dropdown-item">Выйти</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </div>
-
     </header>
 </div>
 
-<div th:fragment="footer" class="container">
-    <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <div class="col-md-4 d-flex align-items-center">
-            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
-                <img class="bi me-2" width="30" height="25" role="img" th:src="@{/images/icon.ico}" alt="Shortli"/>
+<div th:fragment="headerBack" class="container">
+    <header class="d-flex align-items-center justify-content-center justify-content-between py-3 mb-3 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 text-dark mb-md-0 text-decoration-none">
+            <img class="bi me-2" width="70" height="70" role="img" th:src="@{/images/Shortli.png}" alt="Shortli"/>
+        </a>
+        <div class="col-md-3 text-end">
+            <a th:href="@{/}">
+                <button type="button" class="btn btn-outline-primary me-2">Назад</button>
             </a>
-            <span class="mb-3 mb-md-0 text-muted">© 2024 Shortli</span>
         </div>
-
-        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
-        </ul>
-    </footer>
+    </header>
 </div>

@@ -7,6 +7,10 @@
 
 <body>
 
+<div layout:fragment="header">
+    <div th:replace="~{fragments/headers :: headerBack}"></div>
+</div>
+
 <div layout:fragment="content">
     <div class="container py-3">
         <h2>Ваши ссылки:</h2>

@@ -11,27 +11,27 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 @RequiredArgsConstructor
-public class MainController {
+public class LinkController {
+    @Value("${shortli.domain.name}")
+    private String DOMAIN_NAME;
     private final UrlService urlService;
 
-    @GetMapping
-    public String mainPage() {
-        return "main";
+    @PostMapping("/shorten")
+    public String shorten(@RequestParam(value = "fullUrl", required = true) String fullUrl, Model model) {
+        Url createdUrl = urlService.addNewUrl(fullUrl);
+        model.addAttribute("createdUrl", DOMAIN_NAME + "/" + createdUrl.getKey());
+        return "shorten";
     }
 
-    @GetMapping("/dashboard")
-    public String dashboard(Model model) {
-        List<Url> userUrls = urlService.getAllUrls();
-        model.addAttribute("urlList", userUrls);
-        return "dashboard";
-    }
-
-    @GetMapping("/admin")
-    public String admin() {
-        return "admin";
+    @GetMapping("/{key}")
+    public String shorten(@PathVariable String key) {
+        Url url = urlService.getUrlByKey(key);
+        if (url != null) {
+            return "redirect:" + url.getFullUrl();
+        } else {
+            return "error";
+        }
     }
 }
