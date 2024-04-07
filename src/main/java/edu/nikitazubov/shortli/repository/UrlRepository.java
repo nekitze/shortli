@@ -10,13 +10,13 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 public interface UrlRepository extends JpaRepository<Url, Long> {
     Optional<Url> findUrlByKey(String key);
 
     List<Url> findUrlsByOwnerId(Long id);
 
     @Modifying
-    @Transactional
     @Query("update Url u set u.visitsCount = u.visitsCount + 1 where u.key = :key")
     void incrementVisitsCountByKey(@Param("key") String key);
 }

@@ -16,6 +16,7 @@ public class Url {
     @Column(unique = true)
     private String key;
 
+    @Lob
     private String fullUrl;
 
     private Long visitsCount;
