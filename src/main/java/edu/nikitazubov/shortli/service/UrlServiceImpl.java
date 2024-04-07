@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 import java.util.List;
 
@@ -46,8 +47,10 @@ public class UrlServiceImpl implements UrlService {
         Url url = new Url();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication != null) {
-            User currentUser = userRepository.findUserByEmail(authentication.getName()).get();
-            url.setOwnerId(currentUser.getId());
+            Optional<User> currentUser = userRepository.findUserByEmail(authentication.getName());
+	    if(currentUser.isPresent()) {
+		url.setOwnerId(currentUser.get().getId());
+	    }
         }
         url.setFullUrl(fullUrl);
         url.setKey(urlShortener.shorten(fullUrl));
