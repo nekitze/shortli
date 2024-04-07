@@ -33,8 +33,7 @@ public class MainController {
     public String getRobotsTxt() {
         return """
                 User-agent: *
-                Disallow: /
-                Allow: /main
+                Allow: /
                 """;
     }
 }
