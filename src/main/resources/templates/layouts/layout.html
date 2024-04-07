@@ -8,9 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="/images/icon.ico" type="image/x-icon">
     <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet" />
-    <link th:href="@{/css/app.css}" rel="stylesheet" />
     <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
-    <script th:src="@{/js/app.js}" defer></script>
     <!-- Yandex.Metrika counter -->
     <script type="text/javascript" >
         (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -42,7 +40,7 @@
 <div layout:fragment="content">CONTENT</div>
 
 <div layout:fragment="banner">
-    <div th:if="${@adsEnabled}" class="container">
+    <div th:if="${@adsEnabled}" class="container py-3">
         <!-- Yandex.RTB R-A-7285205-1 -->
         <div id="yandex_rtb_R-A-7285205-1"></div>
         <script>
