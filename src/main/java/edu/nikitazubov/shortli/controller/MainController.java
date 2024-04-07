@@ -3,6 +3,7 @@ package edu.nikitazubov.shortli.controller;
 import edu.nikitazubov.shortli.entity.Url;
 import edu.nikitazubov.shortli.service.UrlService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +16,8 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 public class MainController {
-    private final String DOMAIN_NAME = "shortli.ru/";
+    @Value("${shortli.domain.name}")
+    private String DOMAIN_NAME;
     private final UrlService urlService;
 
     @GetMapping
@@ -33,7 +35,7 @@ public class MainController {
     @PostMapping("/shorten")
     public String shorten(@RequestParam(value = "fullUrl", required = true) String fullUrl, Model model) {
         Url createdUrl = urlService.addNewUrl(fullUrl);
-        model.addAttribute("createdUrl", DOMAIN_NAME + createdUrl.getKey());
+        model.addAttribute("createdUrl", DOMAIN_NAME + "/" + createdUrl.getKey());
         return "shorten";
     }
 

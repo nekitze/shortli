@@ -30,8 +30,8 @@
                         </a>
                     </td>
                     <td>
-                        <a th:href="@{'https://shortli.ru/' + ${url.getKey()}}" th:target="_blank">
-                            <span th:text="@{'https://shortli.ru/' + ${url.getKey()}}"></span>
+                        <a th:href="@{'http://' + ${@domainName} + '/' + ${url.getKey()}}" th:target="_blank">
+                            <span th:text="@{${@domainName} + '/' + ${url.getKey()}}"></span>
                         </a>
                     </td>
                     <td>
