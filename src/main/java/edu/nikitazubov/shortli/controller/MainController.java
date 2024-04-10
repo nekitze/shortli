@@ -34,7 +34,9 @@ public class MainController {
         return """
                 User-agent: *
                 Allow: /
-                Disallow: /shorten/
+                Disallow: /shorten
+                Disallow: /signup
+                Disallow: /login
                 """;
     }
 }
