@@ -34,6 +34,7 @@ public class MainController {
         return """
                 User-agent: *
                 Allow: /
+                Disallow: /shorten/
                 """;
     }
 }
