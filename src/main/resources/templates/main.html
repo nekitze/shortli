@@ -14,18 +14,53 @@
         <form th:action="@{/shorten}" method="post" class="py-5">
             <div class="row col-sm-10 col-md-8 col-lg-6 mb-3 mx-auto">
                 <label for="linkInput" class="form-label"></label>
-                <div id="urlError" class="alert alert-danger notification" style="display: none" role="alert">Введите корректный URL</div>
-                <input type="text" class="py-3 form-control text-center mb-3" id="linkInput" th:name="fullUrl" placeholder="Вставьте ссылку, которую нужно сократить" required>
+                <div id="urlError" class="alert alert-danger notification" style="display: none" role="alert">Введите
+                    корректный URL
+                </div>
+                <input type="text" class="py-3 form-control text-center mb-3" id="linkInput" th:name="fullUrl"
+                       placeholder="Вставьте ссылку, которую нужно сократить" required>
                 <button type="submit" class="btn btn-primary btn-lg">Сократить!</button>
             </div>
         </form>
     </div>
 
-    <div class="col-md-10 col-lg-6 container py-3">
-        <p class="fs-5 text-center">Знакомьтесь, Shortli - бесплатный помощник в сокращении ссылок!</p>
+    <div class="col-md-9 col-lg-6 container py-3">
+        <h2 class="fs-4 text-center">Знакомьтесь, Shortli - бесплатный помощник в сокращении ссылок!</h2>
         <p class="fs-5">Shortli предлагает простой и удобный способ сокращения длинных и сложных URL-адресов в короткие,
-            запоминающиеся и легко отслеживаемые ссылки. Это идеальный инструмент для тех, кто хочет сделать сложные
+            запоминающиеся и легко отслеживаемые ссылки.</p>
+        <br>
+        <h2 class="fs-4 text-center">Зачем сокращать ссылки?</h2>
+        <p class="fs-5">С помощью Shortli можно сократить ссылку на товар с алиэкспресс, реферальную ссылку, ссылку на
+            сайт в ворде. Сервис поможет студентам, веб-мастерам и простым пользователям сделать ссылки на различные
+            ресурсы компактнее.</p>
+        <p class="fs-5">Короткие URL пригодятся при написании сообщений, курсовых работ, при размещении ссылок
+            на
+            популярных платформах, таких как VK, Telegram, Одноклассники, WhatsApp, Instagram, Twitter, и других.</p>
+        <p class="fs-5">Shortli - это идеальный инструмент для тех, кто хочет сделать сложные
             веб-адреса более доступными и привлекательными для пользователей.</p>
+        <br>
+        <h2 class="fs-4 text-center">Почему стоит использовать наш сервис?</h2>
+        <ul>
+            <li class="fs-5">
+                <h3 class="fs-5">Это быстро</h3>
+                <p class="fs-5">Мгновенное сокращение ссылок, что позволяет быстро интегрировать их в маркетинговые
+                    материалы и социальные сети.</p>
+            </li>
+            <li class="fs-5">
+                <h3 class="fs-5">Это просто</h3>
+                <p class="fs-5">Простой и интуитивно понятный процесс создания и использования сокращенных ссылок.</p>
+            </li>
+            <li class="fs-5">
+                <h3 class="fs-5">Храните ссылки в одном месте</h3>
+                <p class="fs-5">Shortli позволяет сохранять сокращенные ссылки в профиле для удобного доступа и
+                    управления. Также предоставляется статистика переходов по ссылке.</p>
+            </li>
+            <li class="fs-5">
+                <h3 class="fs-5">Храните ссылки сколько угодно</h3>
+                <p class="fs-5"> Shortli обеспечивает безопасное и бессрочное хранение ваших ссылок, что гарантирует их
+                    доступность и актуальность в любое время.</p>
+            </li>
+        </ul>
     </div>
 
     <script>
@@ -34,7 +69,7 @@
             return regex.test(url);
         }
 
-        document.querySelector('form').addEventListener('submit', function(event) {
+        document.querySelector('form').addEventListener('submit', function (event) {
             const urlInput = document.getElementById('linkInput');
             const urlError = document.getElementById('urlError');
             if (!isValidUrl(urlInput.value)) {
