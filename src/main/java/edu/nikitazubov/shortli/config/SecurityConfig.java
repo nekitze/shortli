@@ -25,7 +25,8 @@ public class SecurityConfig {
             "/signup/**",
             "/shorten/**",
             "/error/**",
-            "/js/**"
+            "/js/**",
+            "/style/**"
     };
 
     @Bean

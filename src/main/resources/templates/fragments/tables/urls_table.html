@@ -1,0 +1,81 @@
+<table th:fragment="urls_table_admin" class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">User ID</th>
+        <th scope="col"> Visits</th>
+        <th scope="col"> Full Url</th>
+        <th scope="col"> Short Url</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${urlList.isEmpty()}">
+        <td colspan="4"> No Urls Available</td>
+    </tr>
+    <tr th:each="url, iter : ${urlList}">
+        <td>
+            <span th:text="${url.getOwnerId()}"></span>
+        </td>
+        <td>
+            <span th:text="@{${url.getVisitsCount()}}"></span>
+        </td>
+        <td class="d-flex justify-content-between">
+            <div class="text-truncate" style="max-width: 30ch">
+                <a th:id="${iter.index} + 'full'" th:href="${url.getFullUrl()}" th:text="${url.getFullUrl()}" th:target="_blank"></a>
+            </div>
+            <span class="icon-link-hover shadow" style="opacity: 50%" th:onclick="'copyToClipboard(\'' + ${iter.index} + 'full' + '\')'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                </svg>
+            </span>
+        </td>
+        <td>
+            <a th:id="${iter.index} + 'short'" th:href="@{'http://' + ${@domainName} + '/' + ${url.getKey()}}" th:target="_blank" th:text="@{${@domainName} + '/' + ${url.getKey()}}"></a>
+            <span class="icon-link-hover shadow float-end" style="opacity: 50%" th:onclick="'copyToClipboard(\'' + ${iter.index} + 'short' + '\')'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                </svg>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<table th:fragment="urls_table" class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col"> Сокращенная ссылка</th>
+        <th scope="col"> Полная ссылка</th>
+        <th scope="col"> Переходы по ссылке</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${urlList.isEmpty()}">
+        <td colspan="3"> No Urls Available</td>
+    </tr>
+    <tr th:each="url, iter : ${urlList}">
+        <td>
+            <a th:href="@{'http://' + ${@domainName} + '/' + ${url.getKey()}}" th:target="_blank">
+                <span th:id="${iter.index} + 'short'" th:text="@{${@domainName} + '/' + ${url.getKey()}}"></span>
+            </a>
+            <span class="icon-link-hover shadow float-end" style="opacity: 50%" th:onclick="'copyToClipboard(\'' + ${iter.index} + 'short' + '\')'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                </svg>
+            </span>
+        </td>
+        <td class="d-flex justify-content-between">
+            <div class="text-truncate" style="max-width: 30ch">
+                <a th:id="${iter.index} + 'full'" th:href="${url.getFullUrl()}" th:text="${url.getFullUrl()}" th:target="_blank"></a>
+            </div>
+            <span class="icon-link-hover shadow" style="opacity: 50%" th:onclick="'copyToClipboard(\'' + ${iter.index} + 'full' + '\')'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-copy" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"/>
+                </svg>
+            </span>
+        </td>
+        <td>
+            <span th:text="@{${url.getVisitsCount()}}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>

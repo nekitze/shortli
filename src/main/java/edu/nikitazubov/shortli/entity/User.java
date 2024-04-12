@@ -23,7 +23,7 @@ public class User {
 
     private String role;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "owner_id")
     private List<Url> ownedUrls;
 

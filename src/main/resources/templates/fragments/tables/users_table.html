@@ -1,0 +1,25 @@
+<table th:fragment="users_table" class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col"> ID </th>
+        <th scope="col"> Email </th>
+        <th scope="col"> Role </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${userList.isEmpty()}">
+        <td colspan="3"> No Users </td>
+    </tr>
+    <tr th:each="user, iter : ${userList}">
+        <td>
+            <span th:text="${user.getId()}"></span>
+        </td>
+        <td>
+            <span th:text="${user.getEmail()}"></span>
+        </td>
+        <td>
+            <span th:text="${user.getRole()}"></span>
+        </td>
+    </tr>
+    </tbody>
+</table>

@@ -15,35 +15,7 @@
     <div class="container py-3">
         <h2>Ваши ссылки:</h2>
         <div class="table-responsive py-3">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th scope="col"> Full Url</th>
-                    <th scope="col"> Short Url</th>
-                    <th scope="col"> Visits</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:if="${urlList.isEmpty()}">
-                    <td colspan="3"> No Urls Available</td>
-                </tr>
-                <tr th:each="url : ${urlList}">
-                    <td>
-                        <a th:href="${url.getFullUrl()}" th:target="_blank">
-                            <span th:text="${url.getFullUrl()}"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <a th:href="@{'http://' + ${@domainName} + '/' + ${url.getKey()}}" th:target="_blank">
-                            <span th:text="@{${@domainName} + '/' + ${url.getKey()}}"></span>
-                        </a>
-                    </td>
-                    <td>
-                        <span th:text="@{${url.getVisitsCount()}}"></span>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <table th:replace="~{fragments/tables/urls_table.html :: urls_table}"></table>
         </div>
     </div>
 </div>
