@@ -27,11 +27,9 @@
                 </button>
             </form>
         </td>
-        <td>
-            <span th:text="${url.getOwnerId()}"></span>
+        <td th:text="${url.getOwnerId()}">
         </td>
-        <td>
-            <span th:text="@{${url.getVisitsCount()}}"></span>
+        <td th:text="@{${url.getVisitsCount()}}">
         </td>
         <td>
             <div class="d-flex justify-content-between">
@@ -63,9 +61,7 @@
                 </button>
             </div>
         </td>
-        <td>
-            <span class="text-nowrap" th:text="${url.getCreatedAt()}"></span>
-        </td>
+        <td class="text-nowrap" th:text="${url.getCreatedAt()}"></td>
     </tr>
     </tbody>
 </table>
@@ -114,9 +110,7 @@
                 </button>
             </div>
         </td>
-        <td>
-            <span th:text="@{${url.getVisitsCount()}}"></span>
-        </td>
+        <td th:text="@{${url.getVisitsCount()}}"></td>
     </tr>
     </tbody>
 </table>
