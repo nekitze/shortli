@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import java.util.List;
@@ -68,6 +69,7 @@ public class UrlServiceImpl implements UrlService {
         url.setFullUrl(fullUrl);
         url.setKey(urlShortener.shorten(fullUrl));
         url.setVisitsCount(0L);
+        url.setCreatedAt(LocalDateTime.now());
         return urlRepository.save(url);
     }
 

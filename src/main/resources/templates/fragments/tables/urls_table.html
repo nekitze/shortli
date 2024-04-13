@@ -1,23 +1,25 @@
-<table th:fragment="urls_table_admin" class="table table-hover">
+<table id="urls_table" th:fragment="urls_table_admin" class="table table-hover">
     <thead>
     <tr>
-        <th scope="col">Actions</th>
-        <th scope="col">User ID</th>
-        <th scope="col">Visits</th>
-        <th scope="col">Full Url</th>
-        <th scope="col">Short Url</th>
+        <th scope="col" style="cursor: pointer;">Actions <i class="fa fa-fw fa-sort" style="display: ;"></i></th>
+        <th scope="col" style="cursor: pointer;">User ID <i class="fa fa-fw fa-sort" style="display: none;"></i></th>
+        <th scope="col" style="cursor: pointer;">Visits <i class="fa fa-fw fa-sort" style="display: none;"></i></th>
+        <th scope="col" style="cursor: pointer;">Full Url <i class="fa fa-fw fa-sort" style="display: none;"></i></th>
+        <th scope="col" style="cursor: pointer;">Short Url <i class="fa fa-fw fa-sort" style="display: none;"></i></th>
+        <th scope="col" style="cursor: pointer;">Created at <i class="fa fa-fw fa-sort" style="display: none;"></i></th>
     </tr>
     </thead>
     <tbody>
     <tr th:if="${urlList.isEmpty()}">
-        <td colspan="5"> No Urls Available</td>
+        <td colspan="6"> No Urls Available</td>
     </tr>
     <tr th:each="url, iter : ${urlList}">
         <td>
             <form action="/admin/deleteUrl" th:method="delete">
-                <input type="hidden" name="urlId" th:value="${url.getId()}" />
+                <input type="hidden" name="urlId" th:value="${url.getId()}"/>
                 <button type="submit" class="btn btn-danger btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash"
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-trash"
                          viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
                         <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
@@ -61,16 +63,19 @@
                 </button>
             </div>
         </td>
+        <td>
+            <span class="text-nowrap" th:text="${url.getCreatedAt()}"></span>
+        </td>
     </tr>
     </tbody>
 </table>
 
-<table th:fragment="urls_table" class="table table-hover">
+<table id="urls_table" th:fragment="urls_table" class="table table-hover">
     <thead>
     <tr>
-        <th scope="col"> Сокращенная ссылка</th>
-        <th scope="col"> Полная ссылка</th>
-        <th scope="col"> Переходы по ссылке</th>
+        <th scope="col" style="cursor: pointer;">Сокращенная ссылка<i class="fa fa-fw fa-sort" style="display: none;"></i></th>
+        <th scope="col" style="cursor: pointer;">Полная ссылка<i class="fa fa-fw fa-sort" style="display: none;"></i></th>
+        <th scope="col" style="cursor: pointer;">Переходы по ссылке<i class="fa fa-fw fa-sort" style="display: none;"></i></th>
     </tr>
     </thead>
     <tbody>
@@ -80,25 +85,25 @@
     <tr th:each="url, iter : ${urlList}">
         <td>
             <div class="d-flex justify-content-between">
-            <a th:href="@{'http://' + ${@domainName} + '/' + ${url.getKey()}}" th:target="_blank">
-                <span th:id="${iter.index} + 'short'" th:text="@{${@domainName} + '/' + ${url.getKey()}}"></span>
-            </a>
-            <button type="button" class="btn btn-secondary btn-sm"
-                    th:onclick="'copyToClipboard(\'' + ${iter.index} + 'short' + '\')'">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-copy" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"></path>
-                </svg>
-            </button>
+                <a th:href="@{'http://' + ${@domainName} + '/' + ${url.getKey()}}" th:target="_blank">
+                    <span th:id="${iter.index} + 'short'" th:text="@{${@domainName} + '/' + ${url.getKey()}}"></span>
+                </a>
+                <button type="button" class="btn btn-secondary btn-sm"
+                        th:onclick="'copyToClipboard(\'' + ${iter.index} + 'short' + '\')'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-copy" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M4 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 5a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1h1v1a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h1v1z"></path>
+                    </svg>
+                </button>
             </div>
         </td>
         <td>
             <div class="d-flex justify-content-between">
-            <div class="text-truncate" style="max-width: 30ch">
-                <a th:id="${iter.index} + 'full'" th:href="${url.getFullUrl()}" th:text="${url.getFullUrl()}"
-                   th:target="_blank"></a>
-            </div>
+                <div class="text-truncate" style="max-width: 30ch">
+                    <a th:id="${iter.index} + 'full'" th:href="${url.getFullUrl()}" th:text="${url.getFullUrl()}"
+                       th:target="_blank"></a>
+                </div>
                 <button type="button" class="btn btn-secondary btn-sm"
                         th:onclick="'copyToClipboard(\'' + ${iter.index} + 'full' + '\')'">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
