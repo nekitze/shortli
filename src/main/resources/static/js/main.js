@@ -1,17 +1,19 @@
 var sortDirections = [];
 
 document.querySelectorAll('#urls_table th').forEach(function (header, index) {
-    header.addEventListener('click', function () {
-        if (sortDirections[index] === undefined) {
-            sortDirections[index] = false;
-        }
-        sortTable(index, sortDirections[index]);
+    if (header.classList.contains("sortable")) {
+        header.addEventListener('click', function () {
+            if (sortDirections[index] === undefined) {
+                sortDirections[index] = false;
+            }
+            sortTable(index, sortDirections[index]);
 
-        sortDirections[index] = !sortDirections[index];
-    });
+            sortDirections[index] = !sortDirections[index];
+        });
+    }
 });
 
-document.querySelectorAll('#urls_table th').forEach(function (header) {
+document.querySelectorAll('#urls_table th.sortable').forEach(function (header) {
     header.addEventListener('mouseover', function () {
         this.querySelector('i.fa-sort').style.display = 'inline';
     });
@@ -34,16 +36,11 @@ function sortTable(columnIndex, reverse) {
             x = rows[i].getElementsByTagName("td")[columnIndex];
             y = rows[i + 1].getElementsByTagName("td")[columnIndex];
 
-            var xValue = parseFloat(x.innerHTML);
-            var yValue = parseFloat(y.innerHTML);
+            const xDateValue = Date.parse(x.innerHTML);
+            const yDateValue = Date.parse(y.innerHTML);
 
-            if (!isNaN(xValue) && !isNaN(yValue)) {
-                if (reverse ? xValue > yValue : xValue < yValue) {
-                    shouldSwitch = true;
-                    break;
-                }
-            } else {
-                if (reverse ? x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase() : x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+            if(!isNaN(xDateValue) || !isNaN(yDateValue)) {
+                if (reverse ? xDateValue > yDateValue : xDateValue < yDateValue) {
                     shouldSwitch = true;
                     break;
                 }
