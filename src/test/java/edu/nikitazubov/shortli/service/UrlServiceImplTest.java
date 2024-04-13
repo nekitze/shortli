@@ -68,7 +68,7 @@ public class UrlServiceImplTest {
 
     @Test
     void getAllUrls_NoAuth() {
-        List<Url> urlsList = urlService.getAllUrls();
+        List<Url> urlsList = urlService.getUrlsByOwnerId();
         assertNull(urlsList);
     }
 
@@ -77,7 +77,7 @@ public class UrlServiceImplTest {
         when(userRepository.findUserByEmail(any())).thenReturn(Optional.of(TEST_USER));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        List<Url> urlsList = urlService.getAllUrls();
+        List<Url> urlsList = urlService.getUrlsByOwnerId();
         assertNotNull(urlsList);
     }
 

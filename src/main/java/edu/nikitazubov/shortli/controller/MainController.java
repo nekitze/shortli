@@ -23,7 +23,7 @@ public class MainController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model) {
-        List<Url> userUrls = urlService.getAllUrls();
+        List<Url> userUrls = urlService.getUrlsByOwnerId();
         model.addAttribute("urlList", userUrls);
         return "dashboard";
     }

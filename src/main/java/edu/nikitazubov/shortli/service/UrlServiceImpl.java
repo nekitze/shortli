@@ -24,6 +24,11 @@ public class UrlServiceImpl implements UrlService {
 
     @Override
     public List<Url> getAllUrls() {
+        return urlRepository.findAll();
+    }
+
+    @Override
+    public List<Url> getUrlsByOwnerId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             User currentUser = userRepository.findUserByEmail(authentication.getName()).get();
