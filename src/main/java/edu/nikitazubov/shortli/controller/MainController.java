@@ -38,6 +38,7 @@ public class MainController {
                 Disallow: /dashboard
                 Disallow: /signUp
                 Disallow: /login
+                Host: shortli.ru
                 """;
     }
 }
