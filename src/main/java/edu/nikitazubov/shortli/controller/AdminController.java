@@ -8,10 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,7 +19,7 @@ public class AdminController {
     private final UrlService urlService;
     private final UserService userService;
 
-    @RequestMapping
+    @GetMapping
     public String adminPage(Model model) {
         List<Url> allUrls = urlService.getAllUrls();
         List<User> allUsers = userService.getAllUsers();
@@ -31,7 +28,7 @@ public class AdminController {
         return "admin";
     }
 
-    @RequestMapping(value = "/deleteUrl", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/deleteUrl")
     public String deleteUrl(@RequestHeader(value = HttpHeaders.REFERER, required = false) final String referrer, @RequestParam("urlId") Long id) {
         urlService.deleteUrl(id);
         return "redirect:" + referrer;
