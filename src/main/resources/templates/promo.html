@@ -15,8 +15,13 @@
 <body>
 <div class="container text-center">
     <h1 class="m-5">Для перехода по ссылке нажмите кнопку:</h1>
-    <button type="button" class="btn btn-primary p-3"><a class="text-white" th:href="${fullUrl}">Перейти</a></button>
+    <div id="timer" class="display-3"></div>
+    <button type="button" id="goButton" class="btn btn-primary p-3 d-none"><a class="text-white" th:href="${fullUrl}">Перейти</a></button>
 </div>
+<!--<div class="container text-center">-->
+<!--    <h1 class="m-5">Для перехода по ссылке нажмите кнопку:</h1>-->
+<!--    <button type="button" class="btn btn-primary p-3"><a class="text-white" th:href="${fullUrl}">Перейти</a></button>-->
+<!--</div>-->
 <!-- Yandex.RTB R-A-7285205-3 -->
 <script>
     window.yaContextCb.push(() => {
@@ -36,6 +41,22 @@
             "platform": "desktop"
         })
     })
+</script>
+<script>
+    function startTimer() {
+        var countDownTime = 5;
+        var x = setInterval(function() {
+            document.getElementById("timer").innerHTML = countDownTime;
+            countDownTime--;
+            if (countDownTime < 0) {
+                document.getElementById("timer").remove()
+                clearInterval(x);
+                document.getElementById("goButton").classList.remove("d-none");
+            }
+        }, 1000);
+    }
+
+    startTimer();
 </script>
 </body>
 </html>
