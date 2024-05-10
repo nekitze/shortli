@@ -1,8 +1,10 @@
 package edu.nikitazubov.shortli.entity;
 
+import groovyjarjarantlr4.v4.runtime.misc.NotNull;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -29,6 +31,9 @@ public class Url {
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
+
+    @Column(name = "monetized", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean monetized;
 
     public void setFullUrl(String fullUrl) {
         if (!fullUrl.startsWith("http://") && !fullUrl.startsWith("https://")) {

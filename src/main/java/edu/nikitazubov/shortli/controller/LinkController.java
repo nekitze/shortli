@@ -26,10 +26,15 @@ public class LinkController {
     }
 
     @GetMapping("/{key}")
-    public String redirectFull(@PathVariable String key) {
+    public String redirectFull(@PathVariable String key, Model model) {
         Url url = urlService.visitUrl(key);
         if (url != null) {
-            return "redirect:" + url.getFullUrl();
+            if (url.isMonetized()) {
+                model.addAttribute("fullUrl", url.getFullUrl());
+                return "promo";
+            } else {
+                return "redirect:" + url.getFullUrl();
+            }
         } else {
             return "error";
         }

@@ -4,10 +4,15 @@ document.querySelectorAll('#urls_table th').forEach(function (header, index) {
     if (header.classList.contains("sortable")) {
         header.addEventListener('click', function () {
 
-            if (index !== 5) {
-                sortTable(index, sortDirection);
-            } else {
-                sortTableByDate(index, sortDirection);
+            switch (index) {
+                case 1:
+                    sortTableByText(index, sortDirection)
+                    break
+                case 6:
+                    sortTableByDate(index, sortDirection);
+                    break
+                default:
+                    sortTable(index, sortDirection);
             }
 
             sortDirection = !sortDirection;
@@ -24,6 +29,25 @@ document.querySelectorAll('#urls_table th.sortable').forEach(function (header) {
     });
 });
 
+function sortTableByText(columnIndex, reverse) {
+    var table = document.getElementById("urls_table");
+    var rows = Array.from(table.rows).slice(1);
+    var sortedRows = rows.sort((a, b) => {
+        var xValue = a.getElementsByTagName("td")[columnIndex].innerText;
+        var yValue = b.getElementsByTagName("td")[columnIndex].innerText;
+
+        if (xValue < yValue) {
+            return reverse ? 1 : -1;
+        } else if (xValue > yValue) {
+            return reverse ? -1 : 1;
+        } else {
+            return 0;
+        }
+    });
+
+    sortedRows.forEach(row => table.appendChild(row));
+}
+
 function sortTable(columnIndex, reverse) {
     var table = document.getElementById("urls_table");
     var rows = Array.from(table.rows).slice(1);
@@ -38,7 +62,7 @@ function sortTable(columnIndex, reverse) {
             yValue = b.getElementsByTagName("td")[columnIndex].innerText;
         }
 
-        return reverse? yValue - xValue : xValue - yValue;
+        return reverse ? yValue - xValue : xValue - yValue;
     });
 
     sortedRows.forEach(row => table.appendChild(row));
@@ -46,11 +70,11 @@ function sortTable(columnIndex, reverse) {
 
 function sortTableByDate(columnIndex, reverse) {
     var table = document.getElementById("urls_table");
-    var rows = Array.from(table.rows).slice(1); // Преобразование строк таблицы в массив объектов
+    var rows = Array.from(table.rows).slice(1);
     var sortedRows = rows.sort((a, b) => {
         var xDateValue = Date.parse(a.getElementsByTagName("td")[columnIndex].innerHTML);
         var yDateValue = Date.parse(b.getElementsByTagName("td")[columnIndex].innerHTML);
-        return reverse? yDateValue - xDateValue : xDateValue - yDateValue;
+        return reverse ? yDateValue - xDateValue : xDateValue - yDateValue;
     });
 
     sortedRows.forEach(row => table.appendChild(row));

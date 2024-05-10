@@ -33,4 +33,12 @@ public class AdminController {
         urlService.deleteUrl(id);
         return "redirect:" + referrer;
     }
+
+    @PostMapping(value = "/monetizeUrl")
+    public String monetizeUrl(@RequestHeader(value = HttpHeaders.REFERER, required = false) final String referrer, @RequestParam("urlId") Long id) {
+        Url url = urlService.getUrlById(id);
+        url.setMonetized(!url.isMonetized());
+        urlService.updateUrl(url);
+        return "redirect:" + referrer;
+    }
 }

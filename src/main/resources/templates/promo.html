@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Переходим по ссылке..</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}" rel="stylesheet"/>
+    <script th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}" defer></script>
+
+    <!-- Yandex.RTB -->
+    <script>window.yaContextCb = window.yaContextCb || []</script>
+    <script src="https://yandex.ru/ads/system/context.js" async></script>
+</head>
+<body>
+<div class="container text-center">
+    <h1 class="m-5">Для перехода по ссылке нажмите кнопку:</h1>
+    <button type="button" class="btn btn-primary p-3"><a class="text-white" th:href="${fullUrl}">Перейти</a></button>
+</div>
+<!-- Yandex.RTB R-A-7285205-3 -->
+<script>
+    window.yaContextCb.push(() => {
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-7285205-3",
+            "type": "fullscreen",
+            "platform": "touch"
+        })
+    })
+</script>
+<!-- Yandex.RTB R-A-7285205-4 -->
+<script>
+    window.yaContextCb.push(()=>{
+        Ya.Context.AdvManager.render({
+            "blockId": "R-A-7285205-4",
+            "type": "fullscreen",
+            "platform": "desktop"
+        })
+    })
+</script>
+</body>
+</html>

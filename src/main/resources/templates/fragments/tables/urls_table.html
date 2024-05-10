@@ -2,6 +2,7 @@
     <thead>
     <tr>
         <th scope="col">Actions </th>
+        <th class="sortable" scope="col" style="cursor: pointer;">Monetization<i class="fa fa-fw fa-sort" style="display: none;"></i></th>
         <th class="sortable" scope="col" style="cursor: pointer;">User ID<i class="fa fa-fw fa-sort" style="display: none;"></i></th>
         <th class="sortable" scope="col" style="cursor: pointer;">Visits<i class="fa fa-fw fa-sort" style="display: none;"></i></th>
         <th scope="col">Full Url</th>
@@ -11,21 +12,34 @@
     </thead>
     <tbody>
     <tr th:if="${urlList.isEmpty()}">
-        <td colspan="6"> No Urls Available</td>
+        <td colspan="7"> No Urls Available</td>
     </tr>
     <tr th:each="url, iter : ${urlList}">
         <td>
-            <form action="/admin/deleteUrl" th:method="delete">
-                <input type="hidden" name="urlId" th:value="${url.getId()}"/>
-                <button type="submit" class="btn btn-danger btn-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-trash"
-                         viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
-                    </svg>
-                </button>
-            </form>
+            <div class="col-md-8 d-flex align-items-center">
+                <form action="/admin/deleteUrl" th:method="delete">
+                    <input type="hidden" name="urlId" th:value="${url.getId()}"/>
+                    <button type="submit" class="btn btn-danger btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-trash"
+                             viewBox="0 0 16 16">
+                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"></path>
+                            <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"></path>
+                        </svg>
+                    </button>
+                </form>
+                <form class="ms-1" action="/admin/monetizeUrl" th:method="post">
+                    <input type="hidden" name="urlId" th:value="${url.getId()}"/>
+                    <button type="submit" class="btn btn-success btn-sm">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cash-stack" viewBox="0 0 16 16">
+                            <path d="M1 3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1zm7 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+                            <path d="M0 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V7a2 2 0 0 1-2-2z"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </td>
+        <td th:text="${url.isMonetized()}">
         </td>
         <td th:text="${url.getOwnerId()}">
         </td>
