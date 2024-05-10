@@ -26,7 +26,7 @@ public class LinkController {
     }
 
     @GetMapping("/{key}")
-    public String shorten(@PathVariable String key) {
+    public String redirectFull(@PathVariable String key) {
         Url url = urlService.visitUrl(key);
         if (url != null) {
             return "redirect:" + url.getFullUrl();

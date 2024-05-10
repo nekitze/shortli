@@ -28,6 +28,11 @@ public class MainController {
         return "dashboard";
     }
 
+    @GetMapping("/rules")
+    public String rules() {
+        return "rules";
+    }
+
     @RequestMapping(value = {"/robots.txt", "/robot.txt"})
     @ResponseBody
     public String getRobotsTxt() {
