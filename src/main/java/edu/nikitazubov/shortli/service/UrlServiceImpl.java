@@ -11,7 +11,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Optional;
 
 import java.util.List;
@@ -53,7 +52,7 @@ public class UrlServiceImpl implements UrlService {
     @Override
     public Url visitUrl(String shortKey) {
         Url url = urlRepository.findUrlByKey(shortKey).orElse(null);
-        if(url != null) {
+        if (url != null) {
             urlRepository.incrementVisitsCountByKey(shortKey);
         }
         return url;
@@ -70,7 +69,7 @@ public class UrlServiceImpl implements UrlService {
         url.setFullUrl(fullUrl);
         url.setKey(urlShortener.shorten(fullUrl));
         url.setVisitsCount(0L);
-        url.setCreatedAt(LocalDateTime.now().atZone(ZoneId.of("Europe/Moscow")).toLocalDateTime());
+        url.setCreatedAt(LocalDateTime.now());
         return urlRepository.save(url);
     }
 
