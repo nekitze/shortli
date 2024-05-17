@@ -45,7 +45,8 @@ function sortTableByText(columnIndex, reverse) {
         }
     });
 
-    sortedRows.forEach(row => table.appendChild(row));
+    var tbody = document.querySelector('#urls_table tbody');
+    sortedRows.forEach(row => tbody.appendChild(row));
 }
 
 function sortTable(columnIndex, reverse) {
@@ -65,19 +66,8 @@ function sortTable(columnIndex, reverse) {
         return reverse ? yValue - xValue : xValue - yValue;
     });
 
-    sortedRows.forEach(row => table.appendChild(row));
-}
-
-function sortTableByDate(columnIndex, reverse) {
-    var table = document.getElementById("urls_table");
-    var rows = Array.from(table.rows).slice(1);
-    var sortedRows = rows.sort((a, b) => {
-        var xDateValue = Date.parse(a.getElementsByTagName("td")[columnIndex].innerHTML);
-        var yDateValue = Date.parse(b.getElementsByTagName("td")[columnIndex].innerHTML);
-        return reverse ? yDateValue - xDateValue : xDateValue - yDateValue;
-    });
-
-    sortedRows.forEach(row => table.appendChild(row));
+    var tbody = document.querySelector('#urls_table tbody');
+    sortedRows.forEach(row => tbody.appendChild(row));
 }
 
 function copyToClipboard(id) {

@@ -29,6 +29,10 @@
                 <div class="container py-3">
                     <h2>Пользовательские ссылки:</h2>
                     <div class="table-responsive py-3">
+                        <input type="text" id="searchInput" placeholder="Фильтр">
+                        <input type="button" value="Поиск" class="btn-secondary" onclick="searchTable()">
+                    </div>
+                    <div class="table-responsive py-3">
                         <table th:replace="~{fragments/tables/urls_table.html :: urls_table_admin}"></table>
                     </div>
                 </div>
@@ -41,6 +45,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" th:src="@{/js/admin.js}"></script>
 </div>
 
 </body>
