@@ -40,6 +40,7 @@ public class MainController {
                 User-agent: *
                 Disallow: /
                 Allow: /$
+                Allow: /favicon.ico
                 Host: shortli.ru
                 """;
     }
