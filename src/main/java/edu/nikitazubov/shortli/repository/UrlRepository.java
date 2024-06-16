@@ -13,7 +13,7 @@ import java.util.Optional;
 
 @Transactional
 public interface UrlRepository extends JpaRepository<Url, Long> {
-    List<Url> findAllByCreatedAtIsOrderByCreatedAtDesc(LocalDateTime createdAt);
+    List<Url> findAllByCreatedAtAfterOrderByCreatedAtDesc(LocalDateTime createdAt);
 
     Optional<Url> findUrlByKey(String key);
 

@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -29,7 +30,7 @@ public class UrlServiceImpl implements UrlService {
     }
 
     public List<Url> getTodayUrls() {
-        return urlRepository.findAllByCreatedAtIsOrderByCreatedAtDesc(LocalDateTime.now());
+        return urlRepository.findAllByCreatedAtAfterOrderByCreatedAtDesc(LocalDate.now().atStartOfDay());
     }
 
     @Override
