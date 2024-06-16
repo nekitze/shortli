@@ -28,6 +28,10 @@ public class UrlServiceImpl implements UrlService {
         return urlRepository.findAll();
     }
 
+    public List<Url> getTodayUrls() {
+        return urlRepository.findAllByCreatedAtIsOrderByCreatedAtDesc(LocalDateTime.now());
+    }
+
     @Override
     public List<Url> getUrlsByOwnerId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

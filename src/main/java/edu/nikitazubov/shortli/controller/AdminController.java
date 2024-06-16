@@ -21,6 +21,15 @@ public class AdminController {
 
     @GetMapping
     public String adminPage(Model model) {
+        List<Url> allUrls = urlService.getTodayUrls();
+        List<User> allUsers = userService.getAllUsers();
+        model.addAttribute("urlList", allUrls);
+        model.addAttribute("userList", allUsers);
+        return "admin";
+    }
+
+    @GetMapping("/getAllUrls")
+    public String allUrls(Model model) {
         List<Url> allUrls = urlService.getAllUrls();
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("urlList", allUrls);

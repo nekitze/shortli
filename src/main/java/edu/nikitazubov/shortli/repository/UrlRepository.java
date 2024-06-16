@@ -7,11 +7,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Transactional
 public interface UrlRepository extends JpaRepository<Url, Long> {
+    List<Url> findAllByCreatedAtIsOrderByCreatedAtDesc(LocalDateTime createdAt);
+
     Optional<Url> findUrlByKey(String key);
 
     List<Url> findUrlsByOwnerId(Long id);

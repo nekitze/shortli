@@ -6,6 +6,9 @@ import java.util.List;
 
 public interface UrlService {
     List<Url> getAllUrls();
+
+    List<Url> getTodayUrls();
+
     List<Url> getUrlsByOwnerId();
 
     Url getUrlById(Long id);

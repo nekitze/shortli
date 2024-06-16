@@ -29,8 +29,10 @@
                 <div class="container py-3">
                     <h2>Пользовательские ссылки:</h2>
                     <div class="table-responsive py-3">
-                        <input type="text" id="searchInput" placeholder="Фильтр">
-                        <input type="button" value="Поиск" class="btn-secondary" onclick="searchTable()">
+                        <input type="text" id="searchInput" class="input-group-sm align-top" placeholder="Фильтр">
+                        <input type="button" value="Поиск" class="btn btn-secondary lh-1" onclick="searchTable()">
+                        <a th:href="@{/admin/getAllUrls}" class="btn btn-outline-primary lh-1">Все ссылки</a>
+                        <a th:href="@{/admin}" class="btn btn-outline-primary lh-1">Сегодня</a>
                     </div>
                     <div class="table-responsive py-3">
                         <table th:replace="~{fragments/tables/urls_table.html :: urls_table_admin}"></table>
