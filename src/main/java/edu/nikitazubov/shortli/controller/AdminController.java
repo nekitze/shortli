@@ -2,6 +2,8 @@ package edu.nikitazubov.shortli.controller;
 
 import edu.nikitazubov.shortli.entity.Url;
 import edu.nikitazubov.shortli.entity.User;
+import edu.nikitazubov.shortli.entity.admin.AdminParameter;
+import edu.nikitazubov.shortli.repository.AdminParameterRepository;
 import edu.nikitazubov.shortli.service.UrlService;
 import edu.nikitazubov.shortli.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -19,10 +21,14 @@ public class AdminController {
     private final UrlService urlService;
     private final UserService userService;
 
+    private final AdminParameterRepository adminParameterRepository;
+
     @GetMapping
     public String adminPage(Model model) {
         List<Url> allUrls = urlService.getTodayUrls();
         List<User> allUsers = userService.getAllUsers();
+        AdminParameter monetizationValue = adminParameterRepository.getReferenceById("random_monetization");
+        model.addAttribute("monetizationValue", Float.parseFloat(monetizationValue.getValue()));
         model.addAttribute("urlList", allUrls);
         model.addAttribute("userList", allUsers);
         return "admin";
@@ -48,6 +54,14 @@ public class AdminController {
         Url url = urlService.getUrlById(id);
         url.setMonetized(!url.isMonetized());
         urlService.updateUrl(url);
+        return "redirect:" + referrer;
+    }
+
+    @PostMapping(value = "/updateRandomMonetization")
+    public String monetizeUrl(@RequestHeader(value = HttpHeaders.REFERER, required = false) final String referrer, @RequestParam("monetizationValue") Float value) {
+        AdminParameter monetizationValue = adminParameterRepository.getReferenceById("random_monetization");
+        monetizationValue.setValue(value.toString());
+        adminParameterRepository.save(monetizationValue);
         return "redirect:" + referrer;
     }
 }

@@ -98,8 +98,8 @@ public class UrlServiceImpl implements UrlService {
     private boolean isRandomMonetized() {
         AdminParameter randomMonetization = adminParameterRepository.findById("random_monetization").orElse(null);
         if (randomMonetization != null) {
-            var value = Float.parseFloat(randomMonetization.getValue());
-            return AdminUtils.roll(value);
+            float randomThreshold = Float.parseFloat(randomMonetization.getValue());
+            return AdminUtils.roll(randomThreshold);
         }
         return false;
     }
