@@ -2,9 +2,12 @@ package edu.nikitazubov.shortli.service;
 
 import edu.nikitazubov.shortli.entity.Url;
 import edu.nikitazubov.shortli.entity.User;
+import edu.nikitazubov.shortli.entity.admin.AdminParameter;
+import edu.nikitazubov.shortli.repository.AdminParameterRepository;
 import edu.nikitazubov.shortli.repository.UrlRepository;
 import edu.nikitazubov.shortli.repository.UserRepository;
 import edu.nikitazubov.shortli.util.UrlShortener;
+import edu.nikitazubov.shortli.util.admin.AdminUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,6 +26,7 @@ public class UrlServiceImpl implements UrlService {
     private final UrlRepository urlRepository;
     private final UrlShortener urlShortener;
     private final UserRepository userRepository;
+    private final AdminParameterRepository adminParameterRepository;
 
     @Override
     public List<Url> getAllUrls() {
@@ -59,6 +63,9 @@ public class UrlServiceImpl implements UrlService {
         Url url = urlRepository.findUrlByKey(shortKey).orElse(null);
         if (url != null) {
             urlRepository.incrementVisitsCountByKey(shortKey);
+            if (!url.isMonetized()) {
+                url.setMonetized(isRandomMonetized());
+            }
         }
         return url;
     }
@@ -86,5 +93,14 @@ public class UrlServiceImpl implements UrlService {
     @Override
     public void deleteUrl(Long id) {
         urlRepository.deleteById(id);
+    }
+
+    private boolean isRandomMonetized() {
+        AdminParameter randomMonetization = adminParameterRepository.findById("random_monetization").orElse(null);
+        if (randomMonetization != null) {
+            var value = Float.parseFloat(randomMonetization.getValue());
+            return AdminUtils.roll(value);
+        }
+        return false;
     }
 }
