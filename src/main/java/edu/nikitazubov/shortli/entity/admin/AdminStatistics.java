@@ -16,7 +16,7 @@ public class AdminStatistics {
     @Id
     private LocalDate date;
 
-    private Long dailyVisits;
+    private long dailyVisits;
 
-    private Long adShows;
+    private long adShows;
 }

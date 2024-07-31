@@ -48,7 +48,17 @@
                 <table th:replace="~{fragments/tables/users_table.html :: users_table}"></table>
             </div>
             <div class="tab-pane fade" id="statistics" role="tabpanel" aria-labelledby="statistics-tab">
-                <p>Тестовые данные для раздела "Статистика"</p>
+                <div class="container mt-5">
+                    <div class="card">
+                        <div class="card-header">
+                            Статистика за <span th:text="${statistics.date}"></span>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Daily Visits: <span th:text="${statistics.dailyVisits}"></span></li>
+                            <li class="list-group-item">Ad Shows: <span th:text="${statistics.adShows}"></span></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
