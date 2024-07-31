@@ -3,7 +3,9 @@ package edu.nikitazubov.shortli.service;
 import edu.nikitazubov.shortli.entity.Url;
 import edu.nikitazubov.shortli.entity.User;
 import edu.nikitazubov.shortli.entity.admin.AdminParameter;
+import edu.nikitazubov.shortli.entity.admin.AdminStatistics;
 import edu.nikitazubov.shortli.repository.AdminParameterRepository;
+import edu.nikitazubov.shortli.repository.AdminStatisticsRepository;
 import edu.nikitazubov.shortli.repository.UrlRepository;
 import edu.nikitazubov.shortli.repository.UserRepository;
 import edu.nikitazubov.shortli.util.UrlShortener;
@@ -27,6 +29,7 @@ public class UrlServiceImpl implements UrlService {
     private final UrlShortener urlShortener;
     private final UserRepository userRepository;
     private final AdminParameterRepository adminParameterRepository;
+    private final AdminStatisticsRepository adminStatisticsRepository;
 
     @Override
     public List<Url> getAllUrls() {
@@ -66,6 +69,16 @@ public class UrlServiceImpl implements UrlService {
             if (!url.isMonetized()) {
                 url.setMonetized(isRandomMonetized());
             }
+            AdminStatistics statistics = adminStatisticsRepository.findById(LocalDate.now()).orElseGet(() -> {
+                AdminStatistics s = new AdminStatistics();
+                s.setDate(LocalDate.now());
+                return s;
+            });
+            statistics.setDailyVisits(statistics.getDailyVisits() + 1);
+            if (url.isMonetized()) {
+                statistics.setAdShows(statistics.getAdShows() + 1);
+            }
+            adminStatisticsRepository.save(statistics);
         }
         return url;
     }
