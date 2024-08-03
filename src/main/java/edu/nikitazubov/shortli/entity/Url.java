@@ -32,6 +32,9 @@ public class Url {
     @Column(name = "monetized", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
     private boolean monetized;
 
+    @Transient
+    private boolean randomMonetized;
+
     public void setFullUrl(String fullUrl) {
         if (!fullUrl.startsWith("http://") && !fullUrl.startsWith("https://")) {
             fullUrl = "http://" + fullUrl;

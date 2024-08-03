@@ -66,8 +66,8 @@ public class UrlServiceImpl implements UrlService {
         Url url = urlRepository.findUrlByKey(shortKey).orElse(null);
         if (url != null) {
             urlRepository.incrementVisitsCountByKey(shortKey);
-            if (!url.isMonetized()) {
-                url.setMonetized(isRandomMonetized());
+            if (!url.isMonetized() && url.getVisitsCount() > 100) {
+                url.setRandomMonetized(isRandomMonetized());
             }
             AdminStatistics statistics = adminStatisticsRepository.findById(LocalDate.now()).orElseGet(() -> {
                 AdminStatistics s = new AdminStatistics();
@@ -75,7 +75,7 @@ public class UrlServiceImpl implements UrlService {
                 return s;
             });
             statistics.setDailyVisits(statistics.getDailyVisits() + 1);
-            if (url.isMonetized()) {
+            if (url.isMonetized() || url.isRandomMonetized()) {
                 statistics.setAdShows(statistics.getAdShows() + 1);
             }
             adminStatisticsRepository.save(statistics);

@@ -29,7 +29,7 @@ public class LinkController {
     public String redirectFull(@PathVariable String key, Model model) {
         Url url = urlService.visitUrl(key);
         if (url != null) {
-            if (url.isMonetized() && url.getVisitsCount() > 50) {
+            if (url.isMonetized() || url.isRandomMonetized()) {
                 model.addAttribute("fullUrl", url.getFullUrl());
                 return "promo";
             } else {
